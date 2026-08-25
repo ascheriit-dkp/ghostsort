@@ -177,7 +177,7 @@ input::placeholder {
 
 input.invalid,
 input.invalid::placeholder {
-  color: #ef00ff;
+  color: #FF0000;
 }
 
 input::-webkit-inner-spin-button,
