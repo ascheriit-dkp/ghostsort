@@ -139,7 +139,7 @@ form label {
   margin-bottom: 8px;
 
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .input-row {
@@ -386,7 +386,7 @@ footer {
 
   color: var(--dim);
 
-  font-size: 11px;
+  font-size: 12px;
   text-align: center;
 }
 
@@ -486,8 +486,8 @@ footer {
     margin-top: auto;
     padding-top: 28px;
 
-    text-align: left;
-    align-items: flex-start;
+    text-align: center;
+    align-items: center;
   }
 }
 
