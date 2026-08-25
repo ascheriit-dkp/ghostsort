@@ -175,11 +175,28 @@ if (demo) {
   const demoCursor = demo.querySelector(".demo-cursor");
 
   const demoInput = demo.querySelector("[data-demo-input]");
-  const demoInputValue = demo.querySelector("[data-demo-input-value]");
-  const demoGenerate = demo.querySelector("[data-demo-generate]");
-  const demoPrefixes = demo.querySelector("[data-demo-prefixes]");
+  const demoInputValue = demo.querySelector(
+    "[data-demo-input-value]"
+  );
+  const demoGenerate = demo.querySelector(
+    "[data-demo-generate]"
+  );
+  const demoPrefixes = demo.querySelector(
+    "[data-demo-prefixes]"
+  );
 
-  const demoFolderList = demo.querySelector("[data-demo-folder-list]");
+  const demoExplorerWindow = demo.querySelector(
+    ".demo-explorer-window"
+  );
+  const demoRenameOption = demo.querySelector(
+    "[data-demo-rename-option]"
+  );
+  const demoShortcut = demo.querySelector(
+    "[data-demo-shortcut]"
+  );
+  const demoFolderList = demo.querySelector(
+    "[data-demo-folder-list]"
+  );
 
   const reduceMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -274,9 +291,17 @@ if (demo) {
     demoGenerate.classList.remove("demo-pressed");
 
     demoPrefixes.classList.remove("demo-visible");
+    demoShortcut.classList.remove("demo-visible");
+
+    demoExplorerWindow.classList.remove(
+      "demo-has-selection"
+    );
 
     demo.querySelectorAll(".demo-prefix-row").forEach((row) => {
-      row.classList.remove("demo-copied");
+      row.classList.remove(
+        "demo-copied",
+        "demo-pressed"
+      );
 
       const copyState = row.querySelector(
         "[data-demo-copy-state]"
@@ -288,16 +313,16 @@ if (demo) {
     demo.querySelectorAll(".demo-folder").forEach((folder) => {
       folder.classList.remove(
         "demo-selected",
-        "demo-renaming"
+        "demo-renaming",
+        "demo-caret-start",
+        "demo-pressed"
       );
-
-      folder.querySelector(
-        ".demo-prefix-note"
-      ).textContent = "";
 
       folder.style.transform = "";
       folder.style.transition = "";
     });
+
+    demoRenameOption.classList.remove("demo-pressed");
 
     reorderFolders(initialOrder, false);
 
@@ -316,21 +341,15 @@ if (demo) {
 
     reorderFolders(finalOrder, false);
 
-    getDemoCopyRow(1)
-      .querySelector("[data-demo-copy-state]")
-      .textContent = "copied";
+    for (let number = 1; number <= 3; number++) {
+      const row = getDemoCopyRow(number);
 
-    getDemoCopyRow(2)
-      .querySelector("[data-demo-copy-state]")
-      .textContent = "copied";
+      row.classList.add("demo-copied");
 
-    getDemoCopyRow(3)
-      .querySelector("[data-demo-copy-state]")
-      .textContent = "copied";
-
-    getDemoCopyRow(1).classList.add("demo-copied");
-    getDemoCopyRow(2).classList.add("demo-copied");
-    getDemoCopyRow(3).classList.add("demo-copied");
+      row.querySelector(
+        "[data-demo-copy-state]"
+      ).textContent = "copied";
+    }
 
     demoCursor.classList.remove("demo-visible");
   }
@@ -362,32 +381,46 @@ if (demo) {
     demoCursor.style.transform =
       `translate3d(${x}px, ${y}px, 0)`;
 
-    return pause(720, token);
+    return pause(840, token);
   }
 
-  async function demoClick(target, token) {
-    if (!await moveDemoCursorTo(target, token)) {
+  async function demoClick(
+    target,
+    token,
+    xRatio = 0.5,
+    yRatio = 0.5
+  ) {
+    if (!await moveDemoCursorTo(
+      target,
+      token,
+      xRatio,
+      yRatio
+    )) {
       return false;
     }
 
     demoCursor.classList.add("demo-clicking");
-
     target.classList.add("demo-pressed");
 
-    if (!await pause(120, token)) {
+    if (!await pause(160, token)) {
       return false;
     }
 
     demoCursor.classList.remove("demo-clicking");
     target.classList.remove("demo-pressed");
 
-    return pause(150, token);
+    return pause(220, token);
   }
 
   async function copyDemoPrefix(number, token) {
     const row = getDemoCopyRow(number);
 
-    if (!await demoClick(row, token)) {
+    if (!await demoClick(
+      row,
+      token,
+      0.84,
+      0.5
+    )) {
       return false;
     }
 
@@ -397,43 +430,95 @@ if (demo) {
       "[data-demo-copy-state]"
     ).textContent = "copied";
 
-    return pause(300, token);
+    return pause(480, token);
   }
 
   async function renameDemoFolder(
     folderName,
-    prefixCount,
     order,
     token
   ) {
     const folder = getDemoFolder(folderName);
 
-    if (!await moveDemoCursorTo(
+    const folderNameElement = folder.querySelector(
+      ".demo-folder-name"
+    );
+
+    /*
+     * Select folder.
+     */
+    if (!await demoClick(
       folder,
       token,
-      0.42,
+      0.35,
       0.5
     )) {
       return false;
     }
 
-    folder.classList.add(
-      "demo-selected",
-      "demo-renaming"
+    folder.classList.add("demo-selected");
+
+    demoExplorerWindow.classList.add(
+      "demo-has-selection"
     );
 
-    folder.querySelector(
-      ".demo-prefix-note"
-    ).textContent =
-      `+ U+200B × ${prefixCount}`;
-
-    if (!await pause(700, token)) {
+    if (!await pause(520, token)) {
       return false;
     }
 
-    reorderFolders(order);
+    /*
+     * Click Explorer's Rename command.
+     */
+    if (!await demoClick(
+      demoRenameOption,
+      token
+    )) {
+      return false;
+    }
+
+    folder.classList.add("demo-renaming");
 
     if (!await pause(480, token)) {
+      return false;
+    }
+
+    /*
+     * Click at the beginning of the filename.
+     */
+    if (!await demoClick(
+      folderNameElement,
+      token,
+      0.04,
+      0.5
+    )) {
+      return false;
+    }
+
+    folder.classList.add("demo-caret-start");
+
+    if (!await pause(420, token)) {
+      return false;
+    }
+
+    /*
+     * Paste the invisible prefix.
+     */
+    demoShortcut.classList.add("demo-visible");
+
+    if (!await pause(1000, token)) {
+      return false;
+    }
+
+    demoShortcut.classList.remove("demo-visible");
+
+    folder.classList.remove("demo-caret-start");
+
+    /*
+     * Explorer re-sorts the folder.
+     */
+    reorderFolders(order);
+
+    if (!await pause(680, token)) {
       return false;
     }
 
@@ -442,115 +527,128 @@ if (demo) {
       "demo-renaming"
     );
 
-    folder.querySelector(
-      ".demo-prefix-note"
-    ).textContent = "";
+    demoExplorerWindow.classList.remove(
+      "demo-has-selection"
+    );
 
-    return pause(250, token);
+    return pause(520, token);
   }
 
   async function runDemo(token) {
-    resetDemo();
-
-    if (!await pause(600, token)) {
-      return;
-    }
-
-    if (!await moveDemoCursorTo(
-      demoInput,
-      token,
-      0.35,
-      0.5
-    )) {
-      return;
-    }
-
-    demoInput.classList.add("demo-focused");
-
-    if (!await pause(350, token)) {
-      return;
-    }
-
-    demoInputValue.textContent = "3";
-
-    if (!await pause(500, token)) {
-      return;
-    }
-
-    demoInput.classList.remove("demo-focused");
-
-    if (!await demoClick(
-      demoGenerate,
-      token
-    )) {
-      return;
-    }
-
-    demoPrefixes.classList.add("demo-visible");
-
-    if (!await pause(700, token)) {
-      return;
-    }
-
-    if (!await copyDemoPrefix(1, token)) {
-      return;
-    }
-
-    if (!await renameDemoFolder(
-      "work",
-      3,
-      [
-        "work",
-        "archive",
-        "personal"
-      ],
-      token
-    )) {
-      return;
-    }
-
-    if (!await copyDemoPrefix(2, token)) {
-      return;
-    }
-
-    if (!await renameDemoFolder(
-      "personal",
-      2,
-      [
-        "work",
-        "personal",
-        "archive"
-      ],
-      token
-    )) {
-      return;
-    }
-
-    if (!await copyDemoPrefix(3, token)) {
-      return;
-    }
-
-    if (!await renameDemoFolder(
-      "archive",
-      1,
-      finalOrder,
-      token
-    )) {
-      return;
-    }
-
-    demoCursor.classList.remove("demo-visible");
-
-    if (!await pause(1800, token)) {
-      return;
-    }
-
-    if (
+    while (
       token === demoToken &&
       demoVisible &&
       !reduceMotion.matches
     ) {
-      runDemo(token);
+      resetDemo();
+
+      if (!await pause(800, token)) {
+        return;
+      }
+
+      /*
+       * Enter 3 in GhostSort.
+       */
+      if (!await demoClick(
+        demoInput,
+        token,
+        0.25,
+        0.5
+      )) {
+        return;
+      }
+
+      demoInput.classList.add("demo-focused");
+
+      if (!await pause(420, token)) {
+        return;
+      }
+
+      demoInputValue.textContent = "3";
+
+      if (!await pause(620, token)) {
+        return;
+      }
+
+      demoInput.classList.remove("demo-focused");
+
+      /*
+       * Generate prefixes.
+       */
+      if (!await demoClick(
+        demoGenerate,
+        token
+      )) {
+        return;
+      }
+
+      demoPrefixes.classList.add("demo-visible");
+
+      if (!await pause(900, token)) {
+        return;
+      }
+
+      /*
+       * Work → #01
+       */
+      if (!await copyDemoPrefix(1, token)) {
+        return;
+      }
+
+      if (!await renameDemoFolder(
+        "work",
+        [
+          "work",
+          "archive",
+          "personal"
+        ],
+        token
+      )) {
+        return;
+      }
+
+      /*
+       * Personal → #02
+       */
+      if (!await copyDemoPrefix(2, token)) {
+        return;
+      }
+
+      if (!await renameDemoFolder(
+        "personal",
+        [
+          "work",
+          "personal",
+          "archive"
+        ],
+        token
+      )) {
+        return;
+      }
+
+      /*
+       * Archive → #03
+       */
+      if (!await copyDemoPrefix(3, token)) {
+        return;
+      }
+
+      if (!await renameDemoFolder(
+        "archive",
+        finalOrder,
+        token
+      )) {
+        return;
+      }
+
+      demoCursor.classList.remove("demo-visible");
+
+      /*
+       * Leave final order visible before looping.
+       */
+      if (!await pause(2200, token)) {
+        return;
+      }
     }
   }
 
