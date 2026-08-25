@@ -391,8 +391,8 @@ footer {
   }
 
   h1 {
-    font-size: clamp(28px, 10vw, 42px);
-    line-height: 1.06;
+    font-size: clamp(26px, 8vw, 34px);
+    line-height: 1.08;
   }
 
   .hero {
