@@ -446,7 +446,7 @@ footer {
 
     margin: 46px 0 34px;
 
-    text-align: center;
+    text-align: left;
   }
 
   h1 {
@@ -480,14 +480,20 @@ footer {
   }
 
   footer {
-    flex-direction: column;
-    gap: 3px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
 
     margin-top: auto;
     padding-top: 28px;
 
-    text-align: center;
-    align-items: center;
+    text-align: left;
+  }
+
+  footer span:last-child {
+    text-align: right;
   }
 }
 
