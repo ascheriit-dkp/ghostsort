@@ -53,12 +53,18 @@ a {
 
 .app {
   width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
   margin: 0;
 
   padding:
-    clamp(20px, 3vw, 40px)
-    clamp(16px, 5vw, 72px)
-    clamp(24px, 4vw, 48px);
+    clamp(24px, 3vw, 40px)
+    clamp(24px, 4vw, 72px)
+    clamp(24px, 3vw, 40px);
 }
 
 header {
@@ -66,8 +72,6 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-
-  margin-bottom: clamp(48px, 8vh, 88px);
 }
 
 .logo,
@@ -97,27 +101,37 @@ header {
 }
 
 .hero {
-  margin-bottom: clamp(34px, 4vw, 52px);
+  width: 72vw;
+
+  margin:
+    clamp(72px, 11vh, 120px)
+    auto
+    clamp(40px, 5vh, 56px);
+
+  text-align: center;
 }
 
 h1 {
   margin: 0;
 
-  font-size: clamp(30px, 5vw, 72px);
-  line-height: 1.04;
-  letter-spacing: -0.06em;
+  font-size: clamp(36px, 3vw, 54px);
+  line-height: 1.06;
+  letter-spacing: -0.055em;
   font-weight: 600;
 
   text-wrap: balance;
 }
 
 .hero p {
-  margin: clamp(12px, 1.5vw, 18px) 0 0;
+  margin: 16px 0 0;
+
   color: var(--muted);
 }
 
 .generator {
-  margin-bottom: clamp(26px, 3vw, 36px);
+  width: 52vw;
+
+  margin: 0 auto;
 }
 
 form label {
@@ -130,7 +144,7 @@ form label {
 
 .input-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 1fr;
   gap: 8px;
 }
 
@@ -163,7 +177,7 @@ input::placeholder {
 
 input.invalid,
 input.invalid::placeholder {
-  color: #ff0000;
+  color: #ff6b6b;
 }
 
 input::-webkit-inner-spin-button,
@@ -177,7 +191,9 @@ input:focus {
 }
 
 .input-row button {
-  min-width: 112px;
+  width: 100%;
+  min-width: 0;
+
   padding: 0 18px;
 
   cursor: pointer;
@@ -305,16 +321,23 @@ input:focus {
 }
 
 details {
-  margin-top: clamp(28px, 3vw, 38px);
+  width: 52vw;
+
+  margin:
+    clamp(36px, 5vh, 52px)
+    auto
+    0;
 
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
 
 summary {
-  padding: 13px 0;
+  padding: 14px 0;
 
   color: var(--muted);
+
+  font-size: 13px;
 
   cursor: pointer;
   list-style: none;
@@ -334,7 +357,7 @@ details[open] summary::after {
 }
 
 .details-content {
-  padding: 0 0 14px;
+  padding: 0 0 16px;
 
   color: var(--muted);
 
@@ -350,15 +373,21 @@ details[open] summary::after {
 }
 
 footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
+  width: 52vw;
 
-  padding-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+
+  margin: auto auto 0;
+  padding-top: clamp(40px, 6vh, 72px);
 
   color: var(--dim);
 
-  font-size: 10px;
+  font-size: 11px;
+  text-align: center;
 }
 
 .sr-only {
@@ -391,13 +420,33 @@ footer {
   }
 }
 
+@media (max-width: 900px) {
+  .hero {
+    width: 86vw;
+  }
+
+  .generator,
+  details,
+  footer {
+    width: 78vw;
+  }
+
+  h1 {
+    font-size: clamp(34px, 5vw, 46px);
+  }
+}
+
 @media (max-width: 600px) {
   .app {
     padding: 20px 14px 26px;
   }
 
-  header {
-    margin-bottom: 46px;
+  .hero {
+    width: 100%;
+
+    margin: 46px 0 34px;
+
+    text-align: left;
   }
 
   h1 {
@@ -405,12 +454,10 @@ footer {
     line-height: 1.08;
   }
 
-  .hero {
-    margin-bottom: 34px;
-  }
-
-  .input-row {
-    grid-template-columns: 1fr;
+  .generator,
+  details,
+  footer {
+    width: 100%;
   }
 
   .input-row button {
@@ -428,9 +475,19 @@ footer {
     padding-right: 8px;
   }
 
+  details {
+    margin-top: 28px;
+  }
+
   footer {
     flex-direction: column;
     gap: 3px;
+
+    margin-top: auto;
+    padding-top: 28px;
+
+    text-align: left;
+    align-items: flex-start;
   }
 }
 
