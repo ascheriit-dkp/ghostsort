@@ -9,6 +9,8 @@ Does it work? Apparently.
 
 Give it a number of items, copy the generated prefixes and put them in front of your filenames.
 
+Tested on Windows 10/11, OneDrive and SharePoint.
+
 Here u go : https://ascheriit-dkp.github.io/ghostsort/
 
 Just a static page generating invisible characters.
