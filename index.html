@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>GhostSort</title>
+  <meta
+    name="description"
+    content="Invisible prefixes for fake custom sorting in Windows Explorer."
+  >
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="app">
+    <header>
+      <a class="logo" href="./" aria-label="GhostSort home">
+        ghostsort<span>_</span>
+      </a>
+
+      <a
+        class="source"
+        href="https://github.com/YOUR_USERNAME/ghostsort"
+        target="_blank"
+        rel="noreferrer"
+      >
+        github ↗
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>fake custom sorting<br>for windows explorer.</h1>
+      <p>generate invisible prefixes. copy. rename. done.</p>
+    </section>
+
+    <section class="generator">
+      <form id="generator-form">
+        <label for="item-count">how many items?</label>
+
+        <div class="input-row">
+          <input
+            id="item-count"
+            name="item-count"
+            type="number"
+            inputmode="numeric"
+            min="1"
+            max="99"
+            value="3"
+            autocomplete="off"
+          >
+
+          <button type="submit">generate</button>
+        </div>
+      </form>
+
+      <div id="results" class="results" hidden>
+        <div class="results-head">
+          <span>desired order</span>
+          <span>click to copy</span>
+        </div>
+
+        <div id="prefix-list" class="prefix-list"></div>
+
+        <div class="actions">
+          <button id="flip-button" class="text-button" type="button">
+            wrong order? flip it
+          </button>
+
+          <button id="reset-button" class="text-button muted" type="button">
+            reset
+          </button>
+        </div>
+
+        <p class="shortcut">
+          Explorer: Name ↑ &nbsp;·&nbsp; F2 → Home → Ctrl+V → Enter
+        </p>
+      </div>
+    </section>
+
+    <details>
+      <summary>what is this?</summary>
+
+      <div class="details-content">
+        <p>
+          Windows Explorer has no manual name sorting.
+          U+200B is invisible but can affect the order.
+        </p>
+
+        <p>
+          #01 goes on the item you want first.
+          Nothing leaves your browser.
+        </p>
+      </div>
+    </details>
+
+    <footer>
+      <span>U+200B</span>
+      <span>probably a bad idea. works anyway.</span>
+    </footer>
+
+    <div
+      id="status"
+      class="sr-only"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
