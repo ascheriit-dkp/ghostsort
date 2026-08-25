@@ -82,17 +82,99 @@
 
     <section class="demo" aria-hidden="true">
       <div class="demo-stage">
-        <div class="demo-window demo-ghostsort-window">
+        <div class="demo-window demo-explorer-window">
           <div class="demo-titlebar">
-            <span class="demo-brand">
-              ghostsort<span>_</span>
+            <span>File Explorer</span>
+            <span class="demo-window-controls">— □ ×</span>
+          </div>
+
+          <div class="demo-explorer-toolbar">
+            <span>←</span>
+            <span>→</span>
+
+            <span class="demo-path">
+              This PC &nbsp;›&nbsp; Documents
+            </span>
+          </div>
+
+          <div class="demo-explorer-commands">
+            <span>New</span>
+            <span>Cut</span>
+            <span>Copy</span>
+            <span
+              class="demo-rename-command"
+              data-demo-rename-option
+            >
+              Rename
+            </span>
+          </div>
+
+          <div class="demo-explorer-body">
+            <div class="demo-explorer-head">
+              Name ↑
+            </div>
+
+            <div class="demo-folder-list" data-demo-folder-list>
+              <div class="demo-folder" data-demo-folder="archive">
+                <span class="demo-folder-icon"></span>
+                <span class="demo-folder-name">Archive</span>
+              </div>
+
+              <div class="demo-folder" data-demo-folder="personal">
+                <span class="demo-folder-icon"></span>
+                <span class="demo-folder-name">Personal</span>
+              </div>
+
+              <div class="demo-folder" data-demo-folder="work">
+                <span class="demo-folder-icon"></span>
+                <span class="demo-folder-name">Work</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="demo-shortcut-overlay"
+            data-demo-shortcut
+          >
+            Ctrl+V
+          </div>
+        </div>
+
+        <div class="demo-window demo-ghostsort-window">
+          <div class="demo-browser-bar">
+            <span class="demo-browser-nav">← → ↻</span>
+
+            <span class="demo-browser-address">
+              ascheriit-dkp.github.io/ghostsort/
             </span>
 
             <span class="demo-window-controls">— □ ×</span>
           </div>
 
           <div class="demo-ghostsort-body">
-            <span class="demo-field-label">how many items?</span>
+            <div class="demo-site-header">
+              <span class="demo-brand">
+                ghostsort<span>_</span>
+              </span>
+
+              <span class="demo-site-source">
+                github ↗
+              </span>
+            </div>
+
+            <div class="demo-site-hero">
+              <strong>
+                Cheating windows explorer into custom sorting.
+              </strong>
+
+              <span>
+                generate invisible prefixes. copy. rename. done.
+              </span>
+            </div>
+
+            <span class="demo-field-label">
+              how many items?
+            </span>
 
             <div class="demo-fake-input" data-demo-input>
               <span data-demo-input-value></span>
@@ -120,48 +202,6 @@
                 <span>#03</span>
                 <span>U+200B × 1</span>
                 <span data-demo-copy-state>copy</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="demo-window demo-explorer-window">
-          <div class="demo-titlebar">
-            <span>File Explorer</span>
-            <span class="demo-window-controls">— □ ×</span>
-          </div>
-
-          <div class="demo-explorer-toolbar">
-            <span>←</span>
-            <span>→</span>
-
-            <span class="demo-path">
-              This PC &nbsp;›&nbsp; Documents
-            </span>
-          </div>
-
-          <div class="demo-explorer-body">
-            <div class="demo-explorer-head">
-              Name ↑
-            </div>
-
-            <div class="demo-folder-list" data-demo-folder-list>
-              <div class="demo-folder" data-demo-folder="archive">
-                <span class="demo-folder-icon"></span>
-                <span class="demo-folder-name">Archive</span>
-                <span class="demo-prefix-note"></span>
-              </div>
-
-              <div class="demo-folder" data-demo-folder="personal">
-                <span class="demo-folder-icon"></span>
-                <span class="demo-folder-name">Personal</span>
-                <span class="demo-prefix-note"></span>
-              </div>
-
-              <div class="demo-folder" data-demo-folder="work">
-                <span class="demo-folder-icon"></span>
-                <span class="demo-folder-name">Work</span>
-                <span class="demo-prefix-note"></span>
               </div>
             </div>
           </div>
