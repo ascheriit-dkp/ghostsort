@@ -156,6 +156,16 @@ input {
   appearance: textfield;
 }
 
+input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+input.invalid,
+input.invalid::placeholder {
+  color: #ff6b6b;
+}
+
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
   appearance: none;
