@@ -12,11 +12,41 @@ const status = document.querySelector("#status");
 
 let itemCount = 0;
 let flipped = false;
+let invalidTimer = null;
+
+input.addEventListener("input", () => {
+  if (input.value === "") {
+    return;
+  }
+
+  const value = Number(input.value);
+
+  if (Number.isFinite(value) && value > 99) {
+    input.value = "";
+    input.classList.add("invalid");
+    input.setAttribute("aria-invalid", "true");
+
+    status.textContent = "Enter a number from 1 to 99.";
+
+    clearTimeout(invalidTimer);
+
+    invalidTimer = setTimeout(() => {
+      input.classList.remove("invalid");
+      input.removeAttribute("aria-invalid");
+    }, 650);
+
+    return;
+  }
+
+  clearTimeout(invalidTimer);
+  input.classList.remove("invalid");
+  input.removeAttribute("aria-invalid");
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const count = Number.parseInt(input.value, 10);
+  const count = Number(input.value);
 
   if (!Number.isInteger(count) || count < 1 || count > 99) {
     input.focus();
@@ -41,7 +71,11 @@ resetButton.addEventListener("click", () => {
   prefixList.innerHTML = "";
   results.hidden = true;
 
-  input.value = 3;
+  clearTimeout(invalidTimer);
+  input.classList.remove("invalid");
+  input.removeAttribute("aria-invalid");
+
+  input.value = "";
   input.focus();
 });
 
