@@ -15,4 +15,4 @@ Here u go : https://ascheriit-dkp.github.io/ghostsort/
 
 Just a static page generating invisible characters.
 
-Anyway, have fun.
+Anyway, have fun. 
