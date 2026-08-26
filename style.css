@@ -456,8 +456,8 @@ input:focus {
 
 .demo-rename-command {
   transition:
-    color 160ms ease,
-    background 160ms ease;
+    color 133ms ease,
+    background 133ms ease;
 }
 
 .demo-explorer-window.demo-has-selection
@@ -516,8 +516,8 @@ input:focus {
   font-size: 11px;
 
   transition:
-    background 180ms ease,
-    transform 440ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    background 150ms ease,
+    transform 367ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .demo-folder.demo-selected {
@@ -610,8 +610,8 @@ input:focus {
   pointer-events: none;
 
   transition:
-    opacity 140ms ease,
-    transform 140ms ease;
+    opacity 117ms ease,
+    transform 117ms ease;
 }
 
 .demo-shortcut-overlay.demo-visible {
@@ -782,7 +782,7 @@ input:focus {
 
 .demo-fake-input.demo-focused .demo-caret {
   opacity: 1;
-  animation: demo-caret 800ms steps(1) infinite;
+  animation: demo-caret 667ms steps(1) infinite;
 }
 
 .demo-prefixes {
@@ -796,8 +796,8 @@ input:focus {
   pointer-events: none;
 
   transition:
-    opacity 220ms ease,
-    transform 220ms ease;
+    opacity 183ms ease,
+    transform 183ms ease;
 }
 
 .demo-prefixes.demo-visible {
@@ -876,8 +876,8 @@ input:focus {
   transform: translate3d(0, 0, 0);
 
   transition:
-    transform 760ms cubic-bezier(0.2, 0.75, 0.25, 1),
-    opacity 100ms ease;
+    transform 633ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    opacity 83ms ease;
 }
 
 .demo-cursor.demo-visible {
