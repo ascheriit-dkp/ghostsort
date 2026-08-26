@@ -10,9 +10,18 @@ const flipButton = document.querySelector("#flip-button");
 const resetButton = document.querySelector("#reset-button");
 const status = document.querySelector("#status");
 
+const cleanupInput = document.querySelector("#cleanup-input");
+const cleanupCopyButton = document.querySelector(
+  "#cleanup-copy-button"
+);
+const cleanupFeedback = document.querySelector(
+  "#cleanup-feedback"
+);
+
 let itemCount = 0;
 let flipped = false;
 let invalidTimer = null;
+let cleanupCopyTimer = null;
 
 input.addEventListener("input", () => {
   if (input.value === "") {
@@ -165,6 +174,79 @@ async function copyToClipboard(text) {
 
   return success;
 }
+
+/* cleanup */
+
+function countZeroWidthSpaces(text) {
+  return text.split(ZERO_WIDTH_SPACE).length - 1;
+}
+
+cleanupInput.addEventListener("input", () => {
+  clearTimeout(cleanupCopyTimer);
+
+  cleanupCopyButton.classList.remove("copied");
+  cleanupCopyButton.textContent = "copy cleaned text";
+
+  if (cleanupInput.value === "") {
+    cleanupFeedback.textContent = "removes U+200B.";
+    return;
+  }
+
+  const count = countZeroWidthSpaces(cleanupInput.value);
+
+  if (count === 0) {
+    cleanupFeedback.textContent = "no U+200B found.";
+    return;
+  }
+
+  cleanupFeedback.textContent =
+    `${count} invisible character${count === 1 ? "" : "s"} found.`;
+});
+
+cleanupCopyButton.addEventListener("click", async () => {
+  const original = cleanupInput.value;
+
+  if (original === "") {
+    cleanupFeedback.textContent = "nothing to clean.";
+    cleanupInput.focus();
+    return;
+  }
+
+  const removed = countZeroWidthSpaces(original);
+
+  const cleaned = original
+    .split(ZERO_WIDTH_SPACE)
+    .join("");
+
+  const copied = await copyToClipboard(cleaned);
+
+  if (!copied) {
+    cleanupFeedback.textContent =
+      "could not copy cleaned text.";
+
+    return;
+  }
+
+  cleanupInput.value = cleaned;
+
+  cleanupCopyButton.classList.add("copied");
+  cleanupCopyButton.textContent = "copied";
+
+  if (removed === 0) {
+    cleanupFeedback.textContent =
+      "nothing to remove. copied anyway.";
+  } else {
+    cleanupFeedback.textContent =
+      `${removed} invisible character${removed === 1 ? "" : "s"} removed. copied.`;
+  }
+
+  clearTimeout(cleanupCopyTimer);
+
+  cleanupCopyTimer = setTimeout(() => {
+    cleanupCopyButton.classList.remove("copied");
+    cleanupCopyButton.textContent = "copy cleaned text";
+  }, 1200);
+});
 
 /* demo */
 
