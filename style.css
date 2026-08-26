@@ -39,7 +39,8 @@ body {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -940,6 +941,91 @@ details[open] summary::after {
   margin-bottom: 0;
 }
 
+/* cleanup */
+
+.cleanup-details {
+  margin-top: 0;
+  border-top: 0;
+}
+
+.cleanup-content {
+  padding: 0 0 16px;
+}
+
+.cleanup-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.cleanup-input {
+  width: 100%;
+  min-height: 96px;
+
+  display: block;
+
+  padding: 11px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 3px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  line-height: 1.5;
+
+  outline: none;
+  resize: vertical;
+}
+
+.cleanup-input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.cleanup-input:focus {
+  border-color: var(--dim);
+}
+
+.cleanup-copy-button {
+  width: 100%;
+  min-height: 40px;
+
+  margin-top: 8px;
+  padding: 0 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 3px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  cursor: pointer;
+}
+
+.cleanup-copy-button:hover {
+  background: var(--surface-hover);
+  border-color: var(--dim);
+}
+
+.cleanup-copy-button.copied {
+  color: var(--accent);
+}
+
+.cleanup-feedback {
+  min-height: 18px;
+
+  margin: 8px 0 0;
+
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
 footer {
   width: 52vw;
 
@@ -1113,6 +1199,10 @@ footer {
 
   details {
     margin-top: 28px;
+  }
+
+  .cleanup-details {
+    margin-top: 0;
   }
 
   footer {
