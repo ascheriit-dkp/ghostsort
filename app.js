@@ -171,6 +171,8 @@ async function copyToClipboard(text) {
 const demo = document.querySelector(".demo");
 
 if (demo) {
+  const DEMO_SPEED = 1.2;
+
   const demoStage = demo.querySelector(".demo-stage");
   const demoCursor = demo.querySelector(".demo-cursor");
 
@@ -218,6 +220,10 @@ if (demo) {
     "archive"
   ];
 
+  function demoDuration(milliseconds) {
+    return Math.round(milliseconds / DEMO_SPEED);
+  }
+
   function getDemoFolder(name) {
     return demo.querySelector(
       `[data-demo-folder="${name}"]`
@@ -238,7 +244,7 @@ if (demo) {
           demoVisible &&
           !reduceMotion.matches
         );
-      }, milliseconds);
+      }, demoDuration(milliseconds));
     });
   }
 
