@@ -3,7 +3,7 @@
 [Tiny website](https://ascheriit-dkp.github.io/ghostsort/) for forcing a custom-ish order in Windows Explorer without putting `01_`, `02_`, `03_` in front of everything.
 
 <p align="center">
-  <img src="./assets/ghostsort-demo.svg" alt="GhostSort demo" width="900">
+  <img src="./gihtub_demo.svg" alt="GhostSort demo" width="900">
 </p>
 
 It abuses the invisible Unicode character `U+200B`.
