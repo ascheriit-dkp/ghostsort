@@ -877,8 +877,7 @@ input:focus {
 
   transition:
     transform 760ms cubic-bezier(0.2, 0.75, 0.25, 1),
-    opacity 180ms ease,
-    scale 100ms ease;
+    opacity 100ms ease;
 }
 
 .demo-cursor.demo-visible {
@@ -886,8 +885,7 @@ input:focus {
 }
 
 .demo-cursor.demo-clicking {
-  scale: 0.88;
-  transform-origin: top left;
+  opacity: 0.72;
 }
 
 details {
