@@ -230,6 +230,39 @@
       </div>
     </details>
 
+    <details class="cleanup-details">
+      <summary>remove invisible characters?</summary>
+
+      <div class="cleanup-content">
+        <label class="cleanup-label" for="cleanup-input">
+          paste or type something
+        </label>
+
+        <textarea
+          id="cleanup-input"
+          class="cleanup-input"
+          placeholder="Paste or type text here"
+          spellcheck="false"
+        ></textarea>
+
+        <button
+          id="cleanup-copy-button"
+          class="cleanup-copy-button"
+          type="button"
+        >
+          copy cleaned text
+        </button>
+
+        <p
+          id="cleanup-feedback"
+          class="cleanup-feedback"
+          aria-live="polite"
+        >
+          removes U+200B.
+        </p>
+      </div>
+    </details>
+
     <footer>
       <span>U+200B</span>
       <span>probably a bad idea. works anyway.</span>
